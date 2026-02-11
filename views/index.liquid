@@ -1,10 +1,97 @@
 {% render 'partials/head.liquid', title: 'Squad page' %}
 
-<h2>Students</h2>
-<ul>
-  {% for person in persons %}
-    <li><a href="/student/{{ person.id }}">{{ person.name }}</a></li>
-  {% endfor %}
-</ul>
+<header class="page-header">
+  <h1>Classified</h1>
+  <p>Case board — klik op een dossier om het open te klappen.</p>
+</header>
+
+<main>
+  <section class="board" id="grid">
+    {% for person in persons %}
+
+      {%- comment -%} Link fallback: profilecard -> website -> github repo {%- endcomment -%}
+      {% if person.profilecard %}
+        {% assign href = person.profilecard %}
+      {% elsif person.website %}
+        {% assign href = person.website %}
+      {% else %}
+        {% assign href = "https://github.com/" | append: person.github_handle | append: "/connect-your-tribe-squad-page" %}
+      {% endif %}
+
+      {%- comment -%} Leeftijd berekenen (optioneel) {%- endcomment -%}
+      {% if person.birthdate %}
+        {% assign birth = person.birthdate | date: '%s' %}
+        {% assign now = 'now' | date: '%s' %}
+        {% assign age = now | minus: birth | divided_by: 31557600 | floor %}
+      {% endif %}
+
+      <details
+        class="dossier"
+        data-name="{{ person.name | escape }}"
+        data-birthdate="{{ person.birthdate | escape }}"
+      >
+        <summary class="dossier__summary">
+          <a class="card-link" href="{{ href }}" target="_blank" rel="noopener">
+            <article class="card">
+              <figure class="photo">
+                {% if person.mugshot %}
+                  <img src="https://fdnd.directus.app/assets/{{ person.mugshot }}?width=500" alt="Profile picture">
+                {% elsif person.avatar %}
+                  <img src="{{ person.avatar }}?width=500" alt="Avatar">
+                {% else %}
+                  <img src="https://kopo.nl/KOP3.JPG" alt="Profile picture">
+                {% endif %}
+
+                <span class="redacted-bar"></span>
+              </figure>
+
+              <section class="meta">
+                <p class="label">CASE FILE</p>
+
+                {% assign nameArray = person.name | default: "Unknown" | split: " " %}
+                <h2 class="name">{{ nameArray[0] }}</h2>
+
+                <ul class="chips">
+                  <li>ALIAS: {{ person.bijnaam | default: "Unknown" }}</li>
+                  <li>CITY: {{ person.woonplaats | default: "Unknown" }}</li>
+                  <li>AGE: {% if person.birthdate %}{{ age }}{% else %}Unknown{% endif %}</li>
+                </ul>
+
+                <div class="dob-row">
+                  {% if person.birthdate %}
+                    <p class="small">DOB: {{ person.birthdate | date: '%d-%m-%Y' }}</p>
+                  {% else %}
+                    <p class="small">DOB: Unknown</p>
+                  {% endif %}
+                  <strong class="stamp">CONFIDENTIAL</strong>
+                </div>
+              </section>
+            </article>
+          </a>
+        </summary>
+
+        <section class="file">
+          <h3>CLASSIFIED DOSSIER</h3>
+          <p><strong>Naam:</strong> {{ person.name | default: "—" }}</p>
+          <p><strong>Bijnaam:</strong> {{ person.bijnaam | default: "—" }}</p>
+          <p><strong>Woonplaats:</strong> {{ person.woonplaats | default: "—" }}</p>
+
+          <p><strong>Geboortedatum:</strong>
+            {% if person.birthdate %}
+              {{ person.birthdate | date: '%d-%m-%Y' }}
+            {% else %}
+              —
+            {% endif %}
+          </p>
+
+          <p class="note">
+            Status: <span class="redacted">████████</span>
+          </p>
+        </section>
+      </details>
+
+    {% endfor %}
+  </section>
+</main>
 
 {% render 'partials/foot.liquid', squads: squads %}
