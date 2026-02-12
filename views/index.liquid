@@ -20,6 +20,7 @@
 
   <section class="board" id="grid">
     <!-- Section heading (validator fix) -->
+    <h2 class="sr-only">Case board</h2>
 
     {% comment %} Loopt over elk persoon {% endcomment %}
     {% for person in persons %}
@@ -83,9 +84,9 @@
               </li>
 
               <li>
-                Bijnaam:
-                {% if person.bijnaam %}
-                  {{ person.bijnaam }}
+                Movie
+                {% if person.fav_movie %}
+                  {{ person.fav_movie }}
                 {% else %}
                   <span class="redacted">{{ redacted }}</span>
                 {% endif %}
@@ -101,9 +102,9 @@
               </li>
 
               <li>
-                Woonplaats:
-                {% if person.woonplaats %}
-                  {{ person.woonplaats }}
+                Last Known Location
+                {% if person.residency %}
+                  {{ person.residency }}
                 {% else %}
                   <span class="redacted">{{ redacted }}</span>
                 {% endif %}

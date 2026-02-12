@@ -28,6 +28,20 @@ body{
   line-height:1.4;
 }
 
+/* Visually hidden (accessibility) */
+.sr-only{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+
 /* Header */
 .page-header{ padding:18px 16px 10px; }
 .page-header h1{ margin:0 0 6px; font-size:1.6rem; }
@@ -68,7 +82,9 @@ section.board{
   }
 
   figure.photo{ width:88px; height:88px; }
-  h2.name{ font-size:1.1rem; }
+
+  /* als je HTML h3.name gebruikt, dan pakt dit het ook */
+  h2.name, h3.name{ font-size:1.1rem; }
 }
 
 /*  DOSSIER  */
@@ -171,7 +187,9 @@ p.label{
   border:1px solid rgba(0,0,0,.22);
 }
 
-h2.name{
+/* Naam heading: werkt voor h2 én h3 */
+h2.name,
+h3.name{
   margin:0;
   font-size:1.2rem;
   font-weight:900;
