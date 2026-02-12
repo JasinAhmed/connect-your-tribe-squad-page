@@ -12,6 +12,8 @@
       <option value="">Alle squads</option>
       <option value="1I">1I</option>
       <option value="1J">1J</option>
+      <option value="a-z">a-z</option>
+      <option value="z-a">z-a</option>
     </select>
     <button type="submit">Filter</button>
   </form>
@@ -32,14 +34,18 @@
       {% endif %}
 
         <article class="card">
+          {%- comment -%}
+            Heading voor het ARTICLE zelf (validator warning fix).
+            Deze staat direct in <article>, niet binnen <section>.
+          {%- endcomment -%}
+          <h3 class="sr-only">Case file {{ person.id }}</h3>
+
           <figure class="photo">
             {% comment %} Foto kiezen: mugshot > avatar > fallback {% endcomment %}
             {% if person.mugshot %}
-              <img src="https://fdnd.directus.app/assets/{{ person.mugshot }}?width=500" alt="Profile picture">
-            {% elsif person.avatar %}
-              <img src="{{ person.avatar }}?width=500" alt="Avatar">
+              <img src="https://fdnd.directus.app/assets/{{ person.mugshot }}?" alt="Profile picture">
             {% else %}
-              <img src="https://kopo.nl/KOP3.JPG" alt="Default profile picture">
+              <img src="unknown.png" alt="Default profile picture">
               <span class="redacted-bar"></span>
             {% endif %}
           </figure>
@@ -49,13 +55,13 @@
             <p class="label">CASE FILE {{ person.id }}-4A-OC-56120</p>
 
             {% comment %} Naam tonen {% endcomment %}
-            <h2 class="name">
+            <h3 class="name">
               {% if person.name %}
                 {{ person.name }}
               {% else %}
                 <span class="redacted">{{ redacted }}</span>
               {% endif %}
-            </h2>
+            </h3>
 
             {% comment %} Chips met jouw velden {% endcomment %}
             <ul class="chips">
