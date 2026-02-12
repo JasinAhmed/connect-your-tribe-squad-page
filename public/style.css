@@ -47,7 +47,64 @@ body{
 .page-header h1{ margin:0 0 6px; font-size:1.6rem; }
 .page-header p{ margin:0; color:var(--muted); }
 
+/* FILTERS (buttons/links)  */
+
+.filters{
+  width: min(1800px, 100%);
+  margin: 0 auto;
+  padding: 0 16px 14px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+.filter-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  text-decoration:none;
+  color: var(--text);
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  padding: 8px 14px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 20px rgba(0,0,0,.35);
+
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+/* klein “classified” pijltje */
+.filter-link::before{
+  content:"▸";
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.filter-link:hover{
+  transform: translateY(-1px);
+  background: rgba(255,59,59,.10);
+  border-color: rgba(255,59,59,.65);
+  box-shadow: 0 14px 28px rgba(0,0,0,.45), 0 0 12px rgba(255,59,59,.25);
+}
+
+/* actieve knop */
+.filter-link.active{
+  background: rgba(255,59,59,.18);
+  border-color: rgba(255,59,59,.85);
+  box-shadow: 0 14px 28px rgba(0,0,0,.45), 0 0 18px rgba(255,59,59,.35);
+}
+
 /*  BOARD  */
+
 section.board{
   width: min(1800px, 100%);
   margin: 0 auto;
@@ -55,6 +112,9 @@ section.board{
   display:grid;
   grid-template-columns: 1fr;
   gap:16px;
+
+  /* belangrijk voor gelijke hoogte */
+  align-items: stretch;
 
   background:
     linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.62)),
@@ -83,13 +143,15 @@ section.board{
 
   figure.photo{ width:88px; height:88px; }
 
-  /* als je HTML h3.name gebruikt, dan pakt dit het ook */
   h2.name, h3.name{ font-size:1.1rem; }
 }
 
-/*  DOSSIER  */
+/* DOSSIER */
+
 .dossier{
   min-width:0;
+  height:100%;                 /* zorgt dat hij rij-hoogte vult */
+
   background:
     radial-gradient(120% 120% at 30% 10%, rgba(255,255,255,.06), transparent 55%),
     linear-gradient(180deg, var(--panel), var(--panel2));
@@ -99,7 +161,6 @@ section.board{
   overflow:hidden;
   position:relative;
   padding: 28px 16px 18px;
-  align-self:start;
 }
 
 /* Punaise */
@@ -124,11 +185,13 @@ section.board{
 /* Link wrapper */
 .card-link{
   display:block;
+  height:100%;         /* belangrijk */
   text-decoration:none;
   color:inherit;
 }
 
-/*  CARD  */
+/* CARD */
+
 article.card{
   display:grid;
   gap:12px;
@@ -160,13 +223,13 @@ figure.photo img{
   transition: filter .2s ease, transform .2s ease;
 }
 
-/* Hover reveal */
 .dossier:hover figure.photo img{
   filter: blur(0px) brightness(1);
   transform: scale(1.01);
 }
 
-/* META */
+/*  META */
+
 section.meta{
   min-width:0;
   display:grid;
@@ -187,7 +250,6 @@ p.label{
   border:1px solid rgba(0,0,0,.22);
 }
 
-/* Naam heading: werkt voor h2 én h3 */
 h2.name,
 h3.name{
   margin:0;
@@ -211,7 +273,6 @@ ul.chips{
 }
 
 ul.chips li{
-  width:auto;
   max-width:100%;
   font-size:12px;
   padding:8px 12px;
@@ -224,7 +285,7 @@ ul.chips li{
   text-overflow:ellipsis;
 }
 
-/* DOB  Confidential */
+/* Confidential */
 .dob-row{
   display:flex;
   align-items:center;

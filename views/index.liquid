@@ -6,17 +6,15 @@
 </header>
 
 <main>
-  <form action="/">
-    <label for="squad">Filter squad:</label>
-    <select id="squad" name="squad">
-      <option value="">Alle squads</option>
-      <option value="1I">1I</option>
-      <option value="1J">1J</option>
-      <option value="a-z">a-z</option>
-      <option value="z-a">z-a</option>
-    </select>
-    <button type="submit">Filter</button>
-  </form>
+<nav class="filters">
+  <p class="sr-only">Filters</p>
+  <a href="/" class="filter-link">Alle squads</a>
+  <a href="/squad-1i" class="filter-link">Squad 1I</a>
+  <a href="/squad-1j" class="filter-link">Squad 1J</a>
+  <a href="/az" class="filter-link">A–Z</a>
+  <a href="/za" class="filter-link">Z–A</a>
+</nav>
+
 
   <section class="board" id="grid">
     <!-- Section heading (validator fix) -->
@@ -29,11 +27,11 @@
 
       {% comment %} Link kiezen: profilecard > website > github repo {% endcomment %}
       {% if person.profilecard %}
-        <a class="dossier card-link" href="{{ person.profilecard }}" target="_blank" rel="noopener">
+        <a class="dossier card-link" href="{{ person.profilecard }}">
       {% elsif person.website %}
-        <a class="dossier card-link" href="{{ person.website }}" target="_blank" rel="noopener">
+        <a class="dossier card-link" href="{{ person.website }}">
       {% else %}
-        <a class="dossier card-link" href="https://github.com/{{ person.github_handle }}/connect-your-tribe-squad-page" target="_blank" rel="noopener">
+        <a class="dossier card-link" href="https://github.com/{{ person.github_handle }}/connect-your-tribe-squad-page">
       {% endif %}
 
         <article class="card">
@@ -84,7 +82,7 @@
               </li>
 
               <li>
-                Movie
+                Movie:
                 {% if person.fav_movie %}
                   {{ person.fav_movie }}
                 {% else %}
@@ -93,7 +91,7 @@
               </li>
 
               <li>
-                Geboortedatum:
+                DOB:
                 {% if person.birthdate %}
                   {{ person.birthdate | date: '%d-%m-%Y' }}
                 {% else %}
