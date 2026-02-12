@@ -19,6 +19,8 @@
   </form>
 
   <section class="board" id="grid">
+    <!-- Section heading (validator fix) -->
+
     {% comment %} Loopt over elk persoon {% endcomment %}
     {% for person in persons %}
 
@@ -34,11 +36,14 @@
       {% endif %}
 
         <article class="card">
-          {%- comment -%}
-            Heading voor het ARTICLE zelf (validator warning fix).
-            Deze staat direct in <article>, niet binnen <section>.
-          {%- endcomment -%}
-          <h3 class="sr-only">Case file {{ person.id }}</h3>
+          <!-- Article heading h2 -->
+          <h2 class="sr-only">
+            {% if person.name %}
+              {{ person.name }}
+            {% else %}
+              Case file {{ person.id }}
+            {% endif %}
+          </h2>
 
           <figure class="photo">
             {% comment %} Foto kiezen: mugshot > avatar > fallback {% endcomment %}
@@ -51,6 +56,9 @@
           </figure>
 
           <section class="meta">
+            {% comment %} Section heading for meta (optional but nice for validators/outlines) {% endcomment %}
+            <h3 class="sr-only">Dossier details</h3>
+
             {% comment %} Case label met ID {% endcomment %}
             <p class="label">CASE FILE {{ person.id }}-4A-OC-56120</p>
 
