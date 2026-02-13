@@ -1,24 +1,22 @@
 {% render 'partials/head.liquid', title: 'Squad page' %}
 
 <header class="page-header">
-  <h1>Classified</h1>
+  <h2>Classified</h2>
   <p>Case File Archive</p>
+
+  <nav class="filters">
+    <a href="/" class="filter-link">Alle squads</a>
+    <a href="/squad-1i" class="filter-link">Squad 1I</a>
+    <a href="/squad-1j" class="filter-link">Squad 1J</a>
+    <a href="/az" class="filter-link">A–Z</a>
+    <a href="/za" class="filter-link">Z–A</a>
+  </nav>
 </header>
 
 <main>
-<nav class="filters">
-  <p class="sr-only">Filters</p>
-  <a href="/" class="filter-link">Alle squads</a>
-  <a href="/squad-1i" class="filter-link">Squad 1I</a>
-  <a href="/squad-1j" class="filter-link">Squad 1J</a>
-  <a href="/az" class="filter-link">A–Z</a>
-  <a href="/za" class="filter-link">Z–A</a>
-</nav>
 
+  <section class="board">
 
-  <section class="board" id="grid">
-    <!-- Section heading validator fix-->
-    <h2 class="sr-only">Case board</h2>
 
     {% comment %} Loopt over elk persoon {% endcomment %}
     {% for person in persons %}
@@ -35,28 +33,28 @@
       {% endif %}
 
         <article class="card">
-          <!-- Article heading h2 -->
-          <h2 class="sr-only">
+
+          {% comment %} Kaart titel (voor structuur) {% endcomment %}
+          <h4>
             {% if person.name %}
               {{ person.name }}
             {% else %}
               Case file {{ person.id }}
             {% endif %}
-          </h2>
+          </h4>
 
           <figure class="photo">
             {% comment %} Foto kiezen: mugshot > avatar > fallback {% endcomment %}
             {% if person.mugshot %}
-              <img src="https://fdnd.directus.app/assets/{{ person.mugshot }}?" alt="Profile picture">
+              <img src="https://fdnd.directus.app/assets/{{ person.mugshot }}?" alt="">
             {% else %}
-              <img src="unknown.png" alt="Default profile picture">
+              <img src="unknown.png" alt="">
               <span class="redacted-bar"></span>
             {% endif %}
           </figure>
 
           <section class="meta">
-            {% comment %} Section heading for meta (optional but nice for validators/outlines) {% endcomment %}
-            <h3 class="sr-only">Dossier details</h3>
+            <h4>Dossier details</h4>
 
             {% comment %} Case label met ID {% endcomment %}
             <p class="label">CASE FILE {{ person.id }}-4A-OC-56120</p>
@@ -73,9 +71,9 @@
             {% comment %} Chips met jouw velden {% endcomment %}
             <ul class="chips">
               <li>
-                Bijnaam:
+                ID:
                 {% if person.nickname %}
-                  {{ person.nickname }}
+                  {{ person.nickname | escape }}
                 {% else %}
                   <span class="redacted">{{ redacted }}</span>
                 {% endif %}
