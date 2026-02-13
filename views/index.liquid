@@ -73,9 +73,9 @@
             {% comment %} Chips met jouw velden {% endcomment %}
             <ul class="chips">
               <li>
-                ID:
-                {% if person.id %}
-                  {{ person.id }}
+                Bijnaam:
+                {% if person.nickname %}
+                  {{ person.nickname }}
                 {% else %}
                   <span class="redacted">{{ redacted }}</span>
                 {% endif %}
