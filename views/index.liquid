@@ -14,9 +14,7 @@
 </header>
 
 <main>
-
   <section class="board">
-
 
     {% comment %} Loopt over elk persoon {% endcomment %}
     {% for person in persons %}
@@ -44,7 +42,7 @@
           </h4>
 
           <figure class="photo">
-            {% comment %} Foto kiezen: mugshot > avatar > fallback {% endcomment %}
+            {% comment %} Foto kiezen: mugshot > fallback {% endcomment %}
             {% if person.mugshot %}
               <img src="https://fdnd.directus.app/assets/{{ person.mugshot }}?" alt="">
             {% else %}
@@ -71,7 +69,7 @@
             {% comment %} Chips met jouw velden {% endcomment %}
             <ul class="chips">
               <li>
-                ID:
+                Bijnaam:
                 {% if person.nickname %}
                   {{ person.nickname | escape }}
                 {% else %}
@@ -98,7 +96,7 @@
               </li>
 
               <li>
-                Last Known Location
+                Last Known Location:
                 {% if person.residency %}
                   {{ person.residency }}
                 {% else %}
