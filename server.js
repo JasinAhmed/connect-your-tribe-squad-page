@@ -69,7 +69,8 @@ app.get('/', async function (request, response) {
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+  // Geef ook activeFilter mee om de actieve filterlink te stylen
+  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data, activeFilter: '/'})
 })
 
 
@@ -94,7 +95,8 @@ app.get('/squad-1i', async function (request, response) {
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+  // Geef ook activeFilter mee om de actieve filterlink te stylen
+  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data, activeFilter: '/squad-1i'})
 })
 
 
@@ -119,7 +121,8 @@ app.get('/squad-1j', async function (request, response) {
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+  // Geef ook activeFilter mee om de actieve filterlink te stylen
+  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data, activeFilter: '/squad-1j'})
 })
 
 
@@ -146,7 +149,8 @@ app.get('/az', async function (request, response) {
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+  // Geef ook activeFilter mee om de actieve filterlink te stylen
+  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data, activeFilter: '/az'})
 })
 
 
@@ -173,7 +177,8 @@ app.get('/za', async function (request, response) {
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+  // Geef ook activeFilter mee om de actieve filterlink te stylen
+  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data, activeFilter: '/za'})
 })
 
 
